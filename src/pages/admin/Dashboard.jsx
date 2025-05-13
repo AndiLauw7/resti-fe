@@ -38,8 +38,8 @@ const Dashboard = () => {
   const trnasaksiBatal = transaksi.filter((p) => p.status === "failed").length;
   const transaksiSucces = transaksi.filter((p) => p.status === "paid").length;
   return (
-    <div>
-      <h1 className="text-2xl font-bold">Dashboard Admin</h1>
+    <div className="p-6">
+      <h1 className="text-xl font-bold  mb-4">Dashboard </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <StatCard
           title="Total Kategori"

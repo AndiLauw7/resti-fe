@@ -7,6 +7,8 @@ import { KategoriPage } from "./pages/admin/kategori/KategoriPage.jsx";
 import { KategoriProvider } from "./context/KategoriContext.jsx";
 import { ProdukPage } from "./pages/admin/produk/ProdukPage.jsx";
 import { ProdukProvider } from "./context/ProdukContext.jsx";
+import { TransaksiProvider } from "./context/TransaksiContext.jsx";
+import { TransaksiPage } from "./pages/admin/transaksi/TransaksiPage.jsx";
 
 function App() {
   return (
@@ -30,6 +32,14 @@ function App() {
                   <ProdukPage />
                 </ProdukProvider>
               </KategoriProvider>
+            }
+          />
+          <Route
+            path="transaksi"
+            element={
+              <TransaksiProvider>
+                <TransaksiPage />
+              </TransaksiProvider>
             }
           />
         </Route>

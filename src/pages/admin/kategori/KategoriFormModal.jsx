@@ -26,6 +26,10 @@ export const KategoriFormModal = ({ open, handleClose, dataUpdate }) => {
     }
   }, [dataUpdate]);
 
+  const resetForm = () => {
+    setNama("");
+    setDeskripsi("");
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = { nama, deskripsi };
@@ -33,6 +37,7 @@ export const KategoriFormModal = ({ open, handleClose, dataUpdate }) => {
       await updateDataKategori(dataUpdate.id, payload);
     } else {
       await createDataKategori(payload);
+      resetForm();
     }
     handleClose();
   };

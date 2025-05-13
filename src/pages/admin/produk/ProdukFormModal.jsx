@@ -21,6 +21,7 @@ export const ProdukFormModal = ({ open, handleClose, dataUpdate }) => {
   const { createDataProduk, updateDataProduk, message, loading } =
     useContext(ProdukContext);
   const { kategoriList } = useContext(KategoriContext);
+ 
   useEffect(() => {
     if (dataUpdate) {
       setNama(dataUpdate.nama || "");
@@ -37,6 +38,14 @@ export const ProdukFormModal = ({ open, handleClose, dataUpdate }) => {
     }
   }, [dataUpdate]);
 
+  const resetForm = () => {
+    setNama("");
+    setHarga("");
+    setStok("");
+    setKategoriId("");
+    setImage(null);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -50,6 +59,7 @@ export const ProdukFormModal = ({ open, handleClose, dataUpdate }) => {
       await updateDataProduk(dataUpdate.id, formData);
     } else {
       await createDataProduk(formData);
+      resetForm();
     }
     handleClose();
   };
@@ -58,7 +68,7 @@ export const ProdukFormModal = ({ open, handleClose, dataUpdate }) => {
     <div>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogTitle>
-          {dataUpdate ? "Edit Kategori" : "Tambah Kategori"}
+          {dataUpdate ? "Edit Produk" : "Tambah Produk"}
         </DialogTitle>
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <DialogContent className="flex flex-col gap-4">

@@ -37,10 +37,6 @@ export const useColumns = (handleEdit, handleDelete) => {
       },
       {
         accessorKey: "Kategori.nama",
-        // accessorFn: (row) => {
-        //   console.log(row);
-        //   row.Kategori?.nama || "-";
-        // },
         header: "Nama Kategori",
         grow: true,
         size: 10,
@@ -75,13 +71,6 @@ export const useColumns = (handleEdit, handleDelete) => {
               className="w-16 h-16 object-cover rounded"
             />
           );
-          //   <img
-          //     src={`http://localhost:5000${
-          //       row.original.image.startsWith("/uploads/") ? "" : "/uploads/"
-          //     }${row.original.image}`}
-          //     alt={row.original.nama}
-          //     className="w-16 h-16 object-cover rounded"
-          //   />
         },
         grow: true,
         size: 10,

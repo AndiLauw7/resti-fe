@@ -10,11 +10,14 @@ const AdminLayouts = () => {
           <Link to="/admin/dashboard">Dashboard</Link>
           <Link to="/admin/kategori">Kelola Kategori</Link>
           <Link to="/admin/produk">Kelola Produk</Link>
-          <Link to="/admin/peminjaman">Peminjaman</Link>
+          <Link to="/admin/transaksi">Kelola Transaksi</Link>
         </nav>
       </aside>
-      <main className="flex-1 bg-gray-100 p-6">
-        <Outlet />
+
+      <main className="flex-1 bg-gray-100 overflow-auto">
+        <div className="min-h-full p-6">
+          <Outlet />
+        </div>
       </main>
     </div>
   );

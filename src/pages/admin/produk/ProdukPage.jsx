@@ -12,7 +12,7 @@ export const ProdukPage = () => {
     setOpenModal(true);
   };
   return (
-    <div className="p-6">
+    <div className="space-y-4">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-xl font-bold">Manajemen Produk</h1>
         <Button
@@ -23,6 +23,7 @@ export const ProdukPage = () => {
           Tambah Produk
         </Button>
       </div>
+
       <ProdukTable onEdit={handleOpenModal} />
       <ProdukFormModal
         open={openModal}
