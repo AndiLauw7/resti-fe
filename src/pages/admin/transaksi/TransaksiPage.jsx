@@ -8,8 +8,7 @@ import { TransaksiDetailModal } from "./TransaksiDetailModal";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import API from "../../../services/api/api";
-import { format } from "date-fns";
+
 export const TransaksiPage = () => {
   const {
     transaksiList,
@@ -62,7 +61,7 @@ export const TransaksiPage = () => {
                 }}
                 InputLabelProps={{
                   ...params.InputLabelProps,
-                  sx: { fontSize: "0.8rem" }, // ukuran label
+                  sx: { fontSize: "0.8rem" },
                 }}
               />
             )}

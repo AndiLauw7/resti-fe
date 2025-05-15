@@ -10,30 +10,27 @@ export const TransaksiContext = createContext([]);
 
 export const TransaksiProvider = ({ children }) => {
   const [transaksiList, setTransaksiList] = useState([]);
-     console.log("Transaksi list:", transaksiList);
+  const [selectedTransaksi, setSelectedTransaksi] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({ text: "", severity: "" });
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
-     const [selectedTransaksi, setSelectedTransaksi] = useState(null);
-     const [loading, setLoading] = useState(false);
-     const [message, setMessage] = useState({ text: "", severity: "" });
-     const [startDate, setStartDate] = useState("");
-     const [endDate, setEndDate] = useState("");
-
-     const fetchTransaksiData = async (startDate, endDate) => {
-       try {
-         const res = await getLaporanTransaksi(startDate, endDate);
-         console.log("API response:", res);
-         setTransaksiList(res.data.data);
-       } catch (error) {
-         console.log(error);
-         setMessage({
-           text: "Gagal mengambil data transaksi",
-           severity: "error",
-         });
-         return error;
-       } finally {
-         setLoading(false);
-       }
-     };
+  const fetchTransaksiData = async (startDate, endDate) => {
+    try {
+      const res = await getLaporanTransaksi(startDate, endDate);
+      setTransaksiList(res.data.data);
+    } catch (error) {
+      console.log(error);
+      setMessage({
+        text: "Gagal mengambil data transaksi",
+        severity: "error",
+      });
+      return error;
+    } finally {
+      setLoading(false);
+    }
+  };
      const fetchTransaksiById = async (id) => {
        try {
          const res = await getTransaksiById(id);

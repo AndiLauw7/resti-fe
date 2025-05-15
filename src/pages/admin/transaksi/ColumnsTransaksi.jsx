@@ -43,10 +43,12 @@ export const useColumns = (handleDetail, handleDelete) => {
       },
 
       {
-        accessorKey: "paymentMethod",
+        // accessorKey: "paymentMethod",
         header: "Pembayaran",
         grow: true,
         size: 10,
+        accessorFn: (row) =>
+          row.paymentMethod?.toUpperCase() ?? "Belum Melakukan Transaksi",
       },
       {
         accessorKey: "status",
