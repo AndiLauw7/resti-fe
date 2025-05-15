@@ -1,10 +1,15 @@
 /* eslint-disable no-unused-vars */
-import { Button } from "@mui/material";
+import React from "react";
+import { Button, TextField } from "@mui/material";
 import { useContext, useState } from "react";
 import { TransaksiTable } from "./TransaksiTable";
 import { TransaksiContext } from "../../../context/TransaksiContext";
 import { TransaksiDetailModal } from "./TransaksiDetailModal";
-
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import API from "../../../services/api/api";
+import { format } from "date-fns";
 export const TransaksiPage = () => {
   const {
     transaksiList,
@@ -12,19 +17,20 @@ export const TransaksiPage = () => {
     selectedTransaksi,
     setSelectedTransaksi,
     fetchTransaksiById,
+    fetchTransaksiData,
     removeTransaksi,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
   } = useContext(TransaksiContext);
   const [openDetail, setOpenDetail] = useState(false);
 
   const handleDetail = async (id) => {
-    // const kategori = kategoriList.find((kategori) => kategori.id === id);
-    // onEdit(kategori);
     await fetchTransaksiById(id);
-    // setSelectedTransaksi(id);
     setOpenDetail(true);
   };
   const handleDelete = async (id) => {
-    // Implementasi hapus transaksi bisa pakai confirm dialog, dll.
     await removeTransaksi(id);
   };
 
@@ -36,7 +42,76 @@ export const TransaksiPage = () => {
     <div className="p-6" style={{ height: "90vh", overflow: "hidden" }}>
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-xl font-bold">Manajemen Transaksi</h1>
-        <Button variant="contained" color="primary">
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="Tanggal Awal"
+            value={startDate}
+            onChange={(newValue) => setStartDate(newValue)}
+            maxDate={new Date()}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                size="small"
+                sx={{
+                  "& .MuiInputBase-input": {
+                    fontSize: "0.8rem",
+                  },
+                  "& .MuiInputLabel-root": {
+                    fontSize: "0.8rem",
+                  },
+                }}
+                InputLabelProps={{
+                  ...params.InputLabelProps,
+                  sx: { fontSize: "0.8rem" }, // ukuran label
+                }}
+              />
+            )}
+          />
+        </LocalizationProvider>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="Tanggal Akhir"
+            value={endDate}
+            // maxDate={new Date()}
+            onChange={(newValue) => setEndDate(newValue)}
+          />
+        </LocalizationProvider>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={() => fetchTransaksiData(startDate, endDate)}
+        >
+          Filter
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            if (!startDate || !endDate) {
+              alert("Silakan pilih tanggal awal dan akhir");
+              return;
+            }
+            // const formattedStartDate = startDate ? formatDate(startDate) : "";
+            // const formattedEndDate = endDate ? formatDate(endDate) : "";
+            // let url = `${API.defaults.baseURL}/transaksi/cetak-laporan-transaksi`;
+            // const params = new URLSearchParams();
+            // if (formattedStartDate)
+            //   params.append("startDate", formattedStartDate);
+            // if (formattedEndDate) params.append("endDate", formattedEndDate);
+            // if ([...params].length > 0) {
+            //   url += `?${params.toString()}`;
+            // }
+            // window.open(url, "_blank");
+            const formatDate = (date) =>
+              date ? new Date(date).toISOString().split("T")[0] : "";
+
+            const sDate = formatDate(startDate);
+            const eDate = formatDate(endDate);
+
+            const url = `http://localhost:5000/api/v1/transaksi/cetak-laporan-transaksi?startDate=${sDate}&endDate=${eDate}`;
+            window.open(url, "_blank");
+          }}
+        >
           Cetak Transaksi
         </Button>
       </div>

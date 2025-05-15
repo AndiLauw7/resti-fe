@@ -12,5 +12,5 @@ export const TransaksiTable = ({
 }) => {
   const columns = useColumns(handleDetail, handleDelete);
 
-  return <TableCustom data={transaksiList} columns={columns} />;
+  return <TableCustom data={transaksiList || []} columns={columns} />;
 };
