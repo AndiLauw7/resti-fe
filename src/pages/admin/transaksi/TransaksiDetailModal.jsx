@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 
 export const TransaksiDetailModal = ({ open, handleClose, transaksi }) => {
+
   return (
     <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
       <DialogTitle>Detail Transaksi</DialogTitle>
@@ -17,7 +18,11 @@ export const TransaksiDetailModal = ({ open, handleClose, transaksi }) => {
             {new Date(transaksi.tanggal).toLocaleString()}
           </p>
           <p>
-            <strong>Nama Pengguna:</strong> {transaksi.Pengguna?.nama}
+            {transaksi?.Pengguna?.nama && (
+              <p>
+                <strong>Nama Pengguna:</strong> {transaksi.Pengguna.nama}
+              </p>
+            )}
           </p>
           <p>
             <strong>Total:</strong> Rp {transaksi.total.toLocaleString("id-ID")}

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AdminLayouts from "../../layouts/adminLayouts/AdminLayouts.jsx";
 import StatCard from "../../components/card/StatCard";
 import {
@@ -7,6 +7,7 @@ import {
   getAllProduk,
   getAllTransaksi,
 } from "../../services/admin/dashboard.js";
+import { AuthContext } from "../../context/AuthContext.jsx";
 
 const Dashboard = () => {
   const [produk, setProduk] = useState([]);

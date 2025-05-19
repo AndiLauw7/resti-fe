@@ -9,42 +9,83 @@ import { ProdukPage } from "./pages/admin/produk/ProdukPage.jsx";
 import { ProdukProvider } from "./context/ProdukContext.jsx";
 import { TransaksiProvider } from "./context/TransaksiContext.jsx";
 import { TransaksiPage } from "./pages/admin/transaksi/TransaksiPage.jsx";
+import AuthLayouts from "./layouts/AuthLayouts.jsx";
+import AdminPrivateRoute from "./private/AdminPrivateRoute.jsx";
+import CustomerPrivateRoute from "./private/CustomerPrivateRoute.jsx";
+import Error404 from "./pages/Eror404.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import { CustomerLayouts } from "./layouts/anggotaLayouts/CustomerLayouts.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/admin" element={<AdminLayouts />}>
-          <Route path="dashboard" element={<DashboardAdmin />} />
+    <AuthProvider>
+      <Router>
+        <Routes>
           <Route
-            path="kategori"
-            element={
-              <KategoriProvider>
-                <KategoriPage />
-              </KategoriProvider>
-            }
-          />
-          <Route
-            path="produk"
+            path="/"
             element={
               <KategoriProvider>
                 <ProdukProvider>
-                  <ProdukPage />
+                  <HomePage />
                 </ProdukProvider>
               </KategoriProvider>
             }
           />
-          <Route
-            path="transaksi"
-            element={
-              <TransaksiProvider>
-                <TransaksiPage />
-              </TransaksiProvider>
-            }
-          />
-        </Route>
-      </Routes>
-    </Router>
+          <Route path="/login" element={<AuthLayouts />}></Route>
+          <Route path="/register" element={<AuthLayouts />}></Route>
+          <Route path="/unauthorized" element={<Error404 />} />
+
+          <Route path="/admin" element={<AdminPrivateRoute />}>
+            <Route element={<AdminLayouts />}>
+              <Route path="dashboard" element={<DashboardAdmin />} />
+              <Route
+                path="kategori"
+                element={
+                  <KategoriProvider>
+                    <KategoriPage />
+                  </KategoriProvider>
+                }
+              />
+              <Route
+                path="produk"
+                element={
+                  <KategoriProvider>
+                    <ProdukProvider>
+                      <ProdukPage />
+                    </ProdukProvider>
+                  </KategoriProvider>
+                }
+              />
+              <Route
+                path="transaksi"
+                element={
+                  <TransaksiProvider>
+                    <TransaksiPage />
+                  </TransaksiProvider>
+                }
+              />
+            </Route>
+          </Route>
+
+          {/* <Route path="/customer" element={<CustomerPrivateRoute />}>
+            <Route element={<CustomerLayouts />}></Route>
+          </Route> */}
+          <Route path="/customer/dashboard" element={<CustomerPrivateRoute />}>
+            <Route
+              index
+              element={
+                <KategoriProvider>
+                  <ProdukProvider>
+                    <CustomerLayouts />
+                  </ProdukProvider>
+                </KategoriProvider>
+              }
+            />
+          </Route>
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

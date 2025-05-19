@@ -23,9 +23,7 @@ export const ProdukProvider = ({ children }) => {
     try {
       const res = await getAllProduk();
       const dataKategori = await getAllKategori();
-
       setKategoriList(dataKategori.data.data);
-
       if (res?.data?.dataProduk) {
         setProdukList(res.data.dataProduk);
       }

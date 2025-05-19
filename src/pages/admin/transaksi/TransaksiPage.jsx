@@ -90,17 +90,7 @@ export const TransaksiPage = () => {
               alert("Silakan pilih tanggal awal dan akhir");
               return;
             }
-            // const formattedStartDate = startDate ? formatDate(startDate) : "";
-            // const formattedEndDate = endDate ? formatDate(endDate) : "";
-            // let url = `${API.defaults.baseURL}/transaksi/cetak-laporan-transaksi`;
-            // const params = new URLSearchParams();
-            // if (formattedStartDate)
-            //   params.append("startDate", formattedStartDate);
-            // if (formattedEndDate) params.append("endDate", formattedEndDate);
-            // if ([...params].length > 0) {
-            //   url += `?${params.toString()}`;
-            // }
-            // window.open(url, "_blank");
+
             const formatDate = (date) =>
               date ? new Date(date).toISOString().split("T")[0] : "";
 

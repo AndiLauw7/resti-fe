@@ -6,22 +6,24 @@ export const useColumns = (handleDetail, handleDelete) => {
       {
         header: "Aksi",
         size: 5,
-        Cell: ({ row }) => (
-          <div className="flex gap-2">
-            <button
-              className="bg-yellow-500 text-white px-2 py-1 rounded"
-              onClick={() => handleDetail(row.original.id)}
-            >
-              Detail
-            </button>
-            <button
-              className="bg-yellow-500 text-white px-2 py-1 rounded"
-              onClick={() => handleDelete(row.original.id)}
-            >
-              Hapus
-            </button>
-          </div>
-        ),
+        Cell: ({ row }) => {
+          return (
+            <div className="flex gap-2">
+              <button
+                className="bg-yellow-500 text-white px-2 py-1 rounded"
+                onClick={() => handleDetail(row.original.id)}
+              >
+                Detail
+              </button>
+              <button
+                className="bg-yellow-500 text-white px-2 py-1 rounded"
+                onClick={() => handleDelete(row.original.id)}
+              >
+                Hapus
+              </button>
+            </div>
+          );
+        },
       },
       {
         header: "No",
@@ -43,7 +45,6 @@ export const useColumns = (handleDetail, handleDelete) => {
       },
 
       {
-        // accessorKey: "paymentMethod",
         header: "Pembayaran",
         grow: true,
         size: 10,

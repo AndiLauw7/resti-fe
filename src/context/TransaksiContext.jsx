@@ -19,6 +19,8 @@ export const TransaksiProvider = ({ children }) => {
   const fetchTransaksiData = async (startDate, endDate) => {
     try {
       const res = await getLaporanTransaksi(startDate, endDate);
+      console.log(res.data.data);
+
       setTransaksiList(res.data.data);
     } catch (error) {
       console.log(error);
