@@ -1,11 +1,45 @@
-import { createContext, useContext, useState } from "react";
+/* eslint-disable no-unused-vars */
+import { createContext, useContext, useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
-import { createKeranjang } from "../services/pengguna/keranjangServices";
+import {
+  createKeranjang,
+  getKeranjangByPengguna,
+} from "../services/pengguna/keranjangServices";
 
 export const KeranjangContext = createContext([]);
 export const KeranjangProvider = ({ children }) => {
   const [keranjangList, setKeranjangList] = useState([]);
+  console.log(keranjangList);
+  const [loading, setLoading] = useState(false);
+  const [keranjangOpen, setKeranjangOpen] = useState(false);
+  const [message, setMessage] = useState({ text: "", severity: "" });
   const { pengguna } = useContext(AuthContext);
+
+  const toggleSideBar = () => {
+    setKeranjangOpen((prev) => !prev);
+  };
+  const fetchDataKeranjang = async () => {
+    if (!pengguna) return;
+    setLoading(true);
+
+    try {
+      const data = await getKeranjangByPengguna(pengguna.id);
+      console.log(data);
+
+      setKeranjangList(data);
+      setMessage({
+        text: "Keranjang berhasil dimuat!",
+        severity: "success",
+      });
+    } catch (error) {
+      console.error("Gagal memuat keranjang:", error);
+      setMessage({
+        text: "Gagal memuat keranjang",
+        severity: "error",
+      });
+    }
+  };
+
   const tambahKeKeranjang = async (produkId, quantity = 1) => {
     try {
       if (!pengguna) return alert("Silakan login terlebih dahulu");
@@ -31,8 +65,24 @@ export const KeranjangProvider = ({ children }) => {
       alert(error.response?.data?.message || "Gagal menambahkan ke keranjang");
     }
   };
+
+  useEffect(() => {
+    if (pengguna?.id) {
+      fetchDataKeranjang();
+    }
+  }, [pengguna]);
+
   return (
-    <KeranjangContext.Provider value={{ keranjangList, tambahKeKeranjang }}>
+    <KeranjangContext.Provider
+      value={{
+        keranjangList,
+        tambahKeKeranjang,
+        message,
+        loading,
+        keranjangOpen,
+        toggleSideBar,
+      }}
+    >
       {children}
     </KeranjangContext.Provider>
   );

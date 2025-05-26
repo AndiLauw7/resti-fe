@@ -2,7 +2,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import FormRegister from "../components/form/FormRegister";
 import FormLogin from "../components/form/FormLogin";
-import logo from "../../public/images/logoResti.webp";
 import Header from "../components/home-page/Header";
 import Footer from "../components/home-page/Footer";
 const AuthLayouts = () => {

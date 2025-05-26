@@ -16,6 +16,9 @@ import Error404 from "./pages/Eror404.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import { CustomerLayouts } from "./layouts/anggotaLayouts/CustomerLayouts.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import KeranjangPage from "./pages/pengguna/Keranjang/KeranjangPage.jsx";
+import { KeranjangProvider } from "./context/KeranjangContext.jsx";
+import DashboardPage from "./pages/pengguna/DashboardPage.jsx";
 
 function App() {
   return (
@@ -68,20 +71,18 @@ function App() {
             </Route>
           </Route>
 
-          {/* <Route path="/customer" element={<CustomerPrivateRoute />}>
-            <Route element={<CustomerLayouts />}></Route>
-          </Route> */}
-          <Route path="/customer/dashboard" element={<CustomerPrivateRoute />}>
-            <Route
-              index
-              element={
-                <KategoriProvider>
-                  <ProdukProvider>
-                    <CustomerLayouts />
-                  </ProdukProvider>
-                </KategoriProvider>
-              }
-            />
+          <Route
+            path="/customer"
+            element={
+              <AuthProvider>
+                <KeranjangProvider>
+                  <CustomerLayouts />
+                </KeranjangProvider>
+              </AuthProvider>
+            }
+          >
+            <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="keranjang" element={<KeranjangPage />} />
           </Route>
         </Routes>
       </Router>
