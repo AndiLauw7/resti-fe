@@ -8,7 +8,8 @@ import { TransaksiDetailModal } from "./TransaksiDetailModal";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-
+import PrintIcon from "@mui/icons-material/Print";
+import FilterListIcon from "@mui/icons-material/FilterList";
 export const TransaksiPage = () => {
   const {
     transaksiList,
@@ -38,8 +39,8 @@ export const TransaksiPage = () => {
     setSelectedTransaksi(null);
   };
   return (
-    <div className="p-6" style={{ height: "90vh", overflow: "hidden" }}>
-      <div className="flex justify-between items-center mb-4">
+    <div className="p-4" style={{ height: "90vh", overflow: "hidden" }}>
+      <div className="flex justify-between items-center ">
         <h1 className="text-xl font-bold">Manajemen Transaksi</h1>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
@@ -80,7 +81,7 @@ export const TransaksiPage = () => {
           color="success"
           onClick={() => fetchTransaksiData(startDate, endDate)}
         >
-          Filter
+          <FilterListIcon />
         </Button>
         <Button
           variant="contained"
@@ -100,8 +101,9 @@ export const TransaksiPage = () => {
             const url = `http://localhost:5000/api/v1/transaksi/cetak-laporan-transaksi?startDate=${sDate}&endDate=${eDate}`;
             window.open(url, "_blank");
           }}
+          className="text-xs"
         >
-          Cetak Transaksi
+          <PrintIcon />
         </Button>
       </div>
       <div style={{ height: "75vh", overflow: "auto" }}>

@@ -6,10 +6,12 @@ import KeranjangSideBar from "../../pages/pengguna/Keranjang/KeranjangSideBar";
 export const CustomerLayouts = () => {
   return (
     <>
+      {/* <KeranjangSideBar /> */}
       <Header />
       <KeranjangSideBar />
-      <main className="pt-24 px-4 max-w-7xl mx-auto min-h-screen bg-gray-50">
-        <Outlet />
+
+      <main className="min-h-screen bg-white">
+        <Outlet /> {/* Di sinilah konten halaman akan dirender */}
       </main>
       <Footer />
     </>

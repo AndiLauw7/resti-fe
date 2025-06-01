@@ -22,7 +22,7 @@ const FormLogin = ({ switchForm }) => {
     console.log("useEffect pengguna:", pengguna);
     if (pengguna) {
       if (pengguna.role === "pembeli") {
-        navigate("/customer/dashboard");
+        navigate("/");
       } else if (pengguna.role === "admin") {
         navigate("/admin/dashboard");
       }

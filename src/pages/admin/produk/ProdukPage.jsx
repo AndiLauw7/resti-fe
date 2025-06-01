@@ -13,7 +13,7 @@ export const ProdukPage = () => {
   };
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center ">
         <h1 className="text-xl font-bold">Manajemen Produk</h1>
         <Button
           variant="contained"

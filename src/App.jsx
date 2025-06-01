@@ -18,74 +18,108 @@ import { CustomerLayouts } from "./layouts/anggotaLayouts/CustomerLayouts.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import KeranjangPage from "./pages/pengguna/Keranjang/KeranjangPage.jsx";
 import { KeranjangProvider } from "./context/KeranjangContext.jsx";
-import DashboardPage from "./pages/pengguna/DashboardPage.jsx";
+import { CustomerProduk } from "./pages/pengguna/produk/CustomerProduk.jsx";
+import Profil from "./pages/pengguna/profil/Profl.jsx";
 
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <KategoriProvider>
-                <ProdukProvider>
-                  <HomePage />
-                </ProdukProvider>
-              </KategoriProvider>
-            }
-          />
-          <Route path="/login" element={<AuthLayouts />}></Route>
-          <Route path="/register" element={<AuthLayouts />}></Route>
-          <Route path="/unauthorized" element={<Error404 />} />
+      <KeranjangProvider>
+        <Router>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <KategoriProvider>
+                  <ProdukProvider>
+                    <HomePage />
+                  </ProdukProvider>
+                </KategoriProvider>
+              }
+            />
+            <Route path="/login" element={<AuthLayouts />}></Route>
+            <Route path="/register" element={<AuthLayouts />}></Route>
+            <Route path="/unauthorized" element={<Error404 />} />
 
-          <Route path="/admin" element={<AdminPrivateRoute />}>
-            <Route element={<AdminLayouts />}>
-              <Route path="dashboard" element={<DashboardAdmin />} />
+            <Route path="/admin" element={<AdminPrivateRoute />}>
+              <Route element={<AdminLayouts />}>
+                <Route path="dashboard" element={<DashboardAdmin />} />
+                <Route
+                  path="kategori"
+                  element={
+                    <KategoriProvider>
+                      <KategoriPage />
+                    </KategoriProvider>
+                  }
+                />
+                <Route
+                  path="produk"
+                  element={
+                    <KategoriProvider>
+                      <ProdukProvider>
+                        <ProdukPage />
+                      </ProdukProvider>
+                    </KategoriProvider>
+                  }
+                />
+                <Route
+                  path="transaksi"
+                  element={
+                    <TransaksiProvider>
+                      <TransaksiPage />
+                    </TransaksiProvider>
+                  }
+                />
+              </Route>
+            </Route>
+
+            {/* <Route
+              path="/"
+              element={
+                <TransaksiProvider>
+                  <KeranjangProvider>
+                    <KategoriProvider>
+                      <ProdukProvider>
+                        <CustomerLayouts />
+                      </ProdukProvider>
+                    </KategoriProvider>
+                  </KeranjangProvider>
+                </TransaksiProvider>
+              }
+            >
+              <Route index element={<HomePage />} />
+
+              <Route path="produk" element={<CustomerProduk />} />
+            </Route> */}
+            <Route
+              path="/"
+              element={
+                <TransaksiProvider>
+                  <KeranjangProvider>
+                    <KategoriProvider>
+                      <ProdukProvider>
+                        <CustomerLayouts />
+                      </ProdukProvider>
+                    </KategoriProvider>
+                  </KeranjangProvider>
+                </TransaksiProvider>
+              }
+            >
+              <Route index element={<HomePage />} />
+              <Route path="produk" element={<CustomerProduk />} />
+
               <Route
-                path="kategori"
+                path="profil"
                 element={
-                  <KategoriProvider>
-                    <KategoriPage />
-                  </KategoriProvider>
-                }
-              />
-              <Route
-                path="produk"
-                element={
-                  <KategoriProvider>
-                    <ProdukProvider>
-                      <ProdukPage />
-                    </ProdukProvider>
-                  </KategoriProvider>
-                }
-              />
-              <Route
-                path="transaksi"
-                element={
-                  <TransaksiProvider>
-                    <TransaksiPage />
-                  </TransaksiProvider>
+                  <CustomerPrivateRoute>
+                    <Profil />
+                  </CustomerPrivateRoute>
                 }
               />
             </Route>
-          </Route>
-
-          <Route
-            path="/customer"
-            element={
-              <AuthProvider>
-                <KeranjangProvider>
-                  <CustomerLayouts />
-                </KeranjangProvider>
-              </AuthProvider>
-            }
-          >
-            <Route path="dashboard" element={<DashboardPage />} />
-            <Route path="keranjang" element={<KeranjangPage />} />
-          </Route>
-        </Routes>
-      </Router>
+          </Routes>
+        </Router>
+      </KeranjangProvider>
     </AuthProvider>
   );
 }

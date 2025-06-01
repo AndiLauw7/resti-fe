@@ -9,7 +9,8 @@ export const getLaporanTransaksi = (startDate, endDate) =>
   API.get(`/transaksi/get-laporan-transaksi`, {
     params: { startDate, endDate },
   });
-export const cetakLaporanTransaksi = (startDate, endDate) =>
+export const cetakLaporanTransaksi = (startDate, endDate, token) =>
   API.get(`/transaksi/cetak-laporan-transaksi`, {
     params: { startDate, endDate },
+    headers: { Authorization: `Bearer ${token}` },
   });

@@ -1,6 +1,14 @@
 import { useMemo } from "react";
 
 export const useColumns = (handleEdit, handleDelete) => {
+  
+  const formatRupiah = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    }).format(number);
+  };
   const columns = useMemo(
     () => [
       {
@@ -42,9 +50,10 @@ export const useColumns = (handleEdit, handleDelete) => {
         size: 10,
       },
       {
-        accessorKey: "harga",
+        // accessorKey: "harga",
         header: "Harga",
         grow: true,
+        accessorFn: (row) => formatRupiah(row.harga),
         size: 10,
       },
       {

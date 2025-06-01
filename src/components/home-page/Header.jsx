@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { KeranjangContext } from "../../context/KeranjangContext";
 import { IconButton } from "@mui/material";
-
+import logo from "../../assets/logoResti.jpg";
 const Header = () => {
   const navigate = useNavigate();
   const { pengguna, handleLogout } = useContext(AuthContext);
@@ -45,8 +45,10 @@ const Header = () => {
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           {/* Logo */}
           <div className="flex items-center space-x-3 cursor-pointer">
-            <svg className="h-8 w-8 text-blue-600" /* logo SVG */ />
-            <h1 className="text-2xl font-bold text-blue-800">MyFurniture</h1>
+            <img src={logo} className="h-8 w-8 text-blue-600" />
+            <h1 className="text-2xl font-bold text-blue-800">
+              Furniture Custom
+            </h1>
           </div>
 
           {/* Desktop Menu */}
@@ -66,18 +68,19 @@ const Header = () => {
               />
             </form>
             <nav className="flex space-x-6">
-              <a
-                href="/"
+              <Link
+                to="/"
                 className="text-gray-700 hover:text-blue-600 transition"
               >
                 Beranda
-              </a>
-              <a
-                href="/produk"
+              </Link>
+              <Link
+                to="/produk"
                 className="text-gray-700 hover:text-blue-600 transition"
               >
                 Produk
-              </a>
+              </Link>
+
               {isAuthPage ? null : pengguna ? (
                 <>
                   <IconButton
@@ -102,12 +105,12 @@ const Header = () => {
                       <p className="text-sm mb-2 font-medium">
                         {pengguna.nama}
                       </p>
-                      <a
-                        href="/profil"
+                      <Link
+                        to="/profil"
                         className="block text-sm hover:text-blue-600"
                       >
                         Profil
-                      </a>
+                      </Link>
                       <button
                         onClick={klikLogout}
                         className="block text-sm text-red-600 mt-2"
@@ -118,12 +121,12 @@ const Header = () => {
                   </div>
                 </>
               ) : (
-                <a
-                  href="/login"
+                <Link
+                  to="/login"
                   className="text-gray-700 hover:text-blue-600 transition"
                 >
                   Masuk
-                </a>
+                </Link>
               )}
             </nav>
           </div>
@@ -165,28 +168,31 @@ const Header = () => {
             animate={{ height: "auto" }}
             className="md:hidden flex flex-col px-4 pb-4"
           >
-            <a href="/" className="text-gray-700 hover:text-blue-600">
+            <Link href="/" className="text-gray-700 hover:text-blue-600">
               Beranda
-            </a>
-            <a href="/produk" className="text-gray-700 hover:text-blue-600">
+            </Link>
+            <Link to="/produk" className="text-gray-700 hover:text-blue-600">
               Produk
-            </a>
+            </Link>
             {!pengguna ? (
-              <a href="/login" className="text-gray-700 hover:text-blue-600">
+              <Link to="/login" className="text-gray-700 hover:text-blue-600">
                 Masuk
-              </a>
+              </Link>
             ) : (
               <>
-                <a
-                  href="/keranjang"
+                <Link
+                  to="/keranjang"
                   className="text-gray-700 hover:text-blue-600"
                 >
                   Keranjang
-                </a>
+                </Link>
 
-                <a href="/profil" className="text-gray-700 hover:text-blue-600">
+                <Link
+                  to="/profil"
+                  className="text-gray-700 hover:text-blue-600"
+                >
                   Profil
-                </a>
+                </Link>
                 <button onClick={klikLogout} className="text-red-600 mt-1">
                   Logout
                 </button>
