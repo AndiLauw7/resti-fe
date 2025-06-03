@@ -6,9 +6,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { KeranjangContext } from "../../context/KeranjangContext";
 import { IconButton } from "@mui/material";
 import logo from "../../assets/logoResti.jpg";
-const Header = () => {
-
-  
+const HeaderCustomer = () => {
+  const navigate = useNavigate();
+  const { pengguna, handleLogout } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -26,6 +26,14 @@ const Header = () => {
     }
   };
 
+  const klikLogout = async () => {
+    await handleLogout();
+    navigate("/login");
+  };
+
+  const location = useLocation();
+  const isAuthPage =
+    location.pathname === "/login" || location.pathname === "/register";
   return (
     <>
       <motion.header
@@ -72,13 +80,58 @@ const Header = () => {
               >
                 Produk
               </Link>
-
-              <Link
-                to="/login"
-                className="text-gray-700 hover:text-blue-600 transition"
+              <IconButton
+                sx={{
+                  p: 0,
+                  color: "#4B5563",
+                  "&:hover": {
+                    color: "#2563EB",
+                  },
+                }}
+                onClick={toggleSideBar}
               >
-                Masuk
-              </Link>
+                <ShoppingCart size={20} />
+              </IconButton>
+
+              <div className="relative group">
+                <User
+                  className="text-gray-700 hover:text-blue-600 cursor-pointer"
+                  size={20}
+                />
+                <div className="absolute right-0 mt-2 hidden group-hover:block bg-white border rounded shadow-md py-2 px-4">
+                  {pengguna ? (
+                    <>
+                      <p className="text-sm mb-2 font-medium">
+                        {pengguna.nama}
+                      </p>
+                      <Link
+                        to="/profil"
+                        className="block text-sm hover:text-blue-600"
+                      >
+                        Profil
+                      </Link>
+                      <button
+                        onClick={klikLogout}
+                        className="block text-sm text-red-600 mt-2"
+                      >
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link to="/login" className="text-sm text-blue-600">
+                        Login
+                      </Link>
+                      <Link
+                        to="/register"
+                        className="text-sm text-blue-600 mt-1"
+                      >
+                        Register
+                      </Link>
+                    </>
+                  )}
+                </div>
+              </div>
             </nav>
           </div>
 
@@ -92,6 +145,7 @@ const Header = () => {
             </button>
           </div>
         </div>
+
         {/* Mobile Search */}
         {searchOpen && (
           <motion.form
@@ -110,6 +164,9 @@ const Header = () => {
             />
           </motion.form>
         )}
+
+        {/* Mobile Nav */}
+
         <motion.nav
           initial={{ height: 0 }}
           animate={{ height: "auto" }}
@@ -118,13 +175,25 @@ const Header = () => {
           <Link href="/" className="text-gray-700 hover:text-blue-600">
             Beranda
           </Link>
-          <Link to="/produk" className="text-gray-700 hover:text-blue-600">
+          <Link
+            to="customer-dashboard/produk"
+            className="text-gray-700 hover:text-blue-600"
+          >
             Produk
           </Link>
 
-          <Link to="/login" className="text-gray-700 hover:text-blue-600">
-            Masuk
-          </Link>
+          <>
+            <Link to="/keranjang" className="text-gray-700 hover:text-blue-600">
+              Keranjang
+            </Link>
+
+            <Link to="/profil" className="text-gray-700 hover:text-blue-600">
+              Profil
+            </Link>
+            <button onClick={klikLogout} className="text-red-600 mt-1">
+              Logout
+            </button>
+          </>
         </motion.nav>
       </motion.header>
       <div className="h-[4px] w-full bg-gradient-to-r from-blue-500 via-blue-600 to-blue-400 shadow-md" />
@@ -132,4 +201,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderCustomer;

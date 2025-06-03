@@ -74,6 +74,7 @@ const AdminLayouts = () => {
         <h2 className="text-2xl font-extrabold mb-6 tracking-wide">
           Admin Panel
         </h2>
+
         <nav className="flex flex-col gap-2 flex-grow">
           <NavLink
             to="/admin/dashboard"
@@ -124,8 +125,16 @@ const AdminLayouts = () => {
         </nav>
       </aside>
 
-      <main className="flex-1 overflow-auto p-6">
-        <h1 className="text-3xl font-bold ">Hello, {pengguna?.nama}</h1>
+      {/* <main className="flex-1 overflow-auto p-6">
+        <h1 className="text-3xl font-bold ">Hello, {pengguna?.nama}</h1>{" "}
+        <h1 className="text-2xl font-bold mb-6">Dashboard Admin</h1>
+        <Outlet />
+      </main> */}
+      <main className="flex-1 overflow-auto p-2">
+        <div className="flex justify-between items-center mb-2">
+          <h6 className="text-1xl font-bold">Dashboard Admin</h6>
+          <h6 className="text-1xl font-bold">Hello, {pengguna?.nama}</h6>
+        </div>
         <Outlet />
       </main>
     </div>

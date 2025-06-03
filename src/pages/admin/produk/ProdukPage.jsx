@@ -12,7 +12,7 @@ export const ProdukPage = () => {
     setOpenModal(true);
   };
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
       <div className="flex justify-between items-center ">
         <h1 className="text-xl font-bold">Manajemen Produk</h1>
         <Button

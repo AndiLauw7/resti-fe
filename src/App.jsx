@@ -14,12 +14,11 @@ import AdminPrivateRoute from "./private/AdminPrivateRoute.jsx";
 import CustomerPrivateRoute from "./private/CustomerPrivateRoute.jsx";
 import Error404 from "./pages/Eror404.jsx";
 import HomePage from "./pages/HomePage.jsx";
-import { CustomerLayouts } from "./layouts/anggotaLayouts/CustomerLayouts.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
-import KeranjangPage from "./pages/pengguna/Keranjang/KeranjangPage.jsx";
 import { KeranjangProvider } from "./context/KeranjangContext.jsx";
 import { CustomerProduk } from "./pages/pengguna/produk/CustomerProduk.jsx";
 import Profil from "./pages/pengguna/profil/Profl.jsx";
+import MainLayout from "./context/LayoutsPenggunaContext.jsx";
 
 function App() {
   return (
@@ -30,15 +29,32 @@ function App() {
             <Route
               path="/"
               element={
-                <KategoriProvider>
-                  <ProdukProvider>
-                    <HomePage />
-                  </ProdukProvider>
-                </KategoriProvider>
+                <TransaksiProvider>
+                  <KeranjangProvider>
+                    <KategoriProvider>
+                      <ProdukProvider>
+                        <MainLayout />
+                      </ProdukProvider>
+                    </KategoriProvider>
+                  </KeranjangProvider>
+                </TransaksiProvider>
               }
-            />
-            <Route path="/login" element={<AuthLayouts />}></Route>
-            <Route path="/register" element={<AuthLayouts />}></Route>
+            >
+              <Route index element={<HomePage />} />
+              <Route path="/produk" element={<CustomerProduk />} />
+
+              <Route
+                path="/profil"
+                element={
+                  <CustomerPrivateRoute>
+                    <Profil />
+                  </CustomerPrivateRoute>
+                }
+              />
+            </Route>
+
+            <Route path="/login" element={<AuthLayouts />} />
+            <Route path="/register" element={<AuthLayouts />} />
             <Route path="/unauthorized" element={<Error404 />} />
 
             <Route path="/admin" element={<AdminPrivateRoute />}>
@@ -71,51 +87,6 @@ function App() {
                   }
                 />
               </Route>
-            </Route>
-
-            {/* <Route
-              path="/"
-              element={
-                <TransaksiProvider>
-                  <KeranjangProvider>
-                    <KategoriProvider>
-                      <ProdukProvider>
-                        <CustomerLayouts />
-                      </ProdukProvider>
-                    </KategoriProvider>
-                  </KeranjangProvider>
-                </TransaksiProvider>
-              }
-            >
-              <Route index element={<HomePage />} />
-
-              <Route path="produk" element={<CustomerProduk />} />
-            </Route> */}
-            <Route
-              path="/"
-              element={
-                <TransaksiProvider>
-                  <KeranjangProvider>
-                    <KategoriProvider>
-                      <ProdukProvider>
-                        <CustomerLayouts />
-                      </ProdukProvider>
-                    </KategoriProvider>
-                  </KeranjangProvider>
-                </TransaksiProvider>
-              }
-            >
-              <Route index element={<HomePage />} />
-              <Route path="produk" element={<CustomerProduk />} />
-
-              <Route
-                path="profil"
-                element={
-                  <CustomerPrivateRoute>
-                    <Profil />
-                  </CustomerPrivateRoute>
-                }
-              />
             </Route>
           </Routes>
         </Router>

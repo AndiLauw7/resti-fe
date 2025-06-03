@@ -39,7 +39,7 @@ export const TransaksiPage = () => {
     setSelectedTransaksi(null);
   };
   return (
-    <div className="p-4" style={{ height: "90vh", overflow: "hidden" }}>
+    <div className="p-2" style={{ height: "90vh", overflow: "hidden" }}>
       <div className="flex justify-between items-center ">
         <h1 className="text-xl font-bold">Manajemen Transaksi</h1>
         <LocalizationProvider dateAdapter={AdapterDateFns}>

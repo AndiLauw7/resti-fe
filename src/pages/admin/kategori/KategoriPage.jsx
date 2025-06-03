@@ -13,7 +13,7 @@ export const KategoriPage = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-2">
       <div className="flex justify-between items-center mb-2">
         <h1 className="text-xl font-bold">Manajemen Kategori</h1>
         <Button
