@@ -50,10 +50,8 @@ const KeranjangSideBar = () => {
       );
       const redirectUrl = paymentResponse.data.redirectUrl;
       window.open(redirectUrl, "_blank");
-      //  location.href = redirectUrl;
+
       alert("Checkout berhasil!");
-      // TODO: Optional: refresh keranjangList dari context
-      // await fetchDataKeranjang(penggunaId);
     } catch (error) {
       alert(
         "Gagal checkout: " + error.response?.data?.message || error.message
@@ -77,7 +75,8 @@ const KeranjangSideBar = () => {
           <p>Keranjang kosong</p>
         ) : (
           keranjangList.map((item) => {
-            const image = item.Produk.image;
+            const image = item.Produk?.image;
+
             const src = image
               ? `${BASE_URL}${
                   image.startsWith("/uploads/") ? "" : "/uploads/"
@@ -96,17 +95,17 @@ const KeranjangSideBar = () => {
                 />
                 <img
                   src={src}
-                  alt={item.Produk.nama}
+                  alt={item.Produk?.nama}
                   className="w-16 h-16 object-cover rounded"
                 />
                 <div className="flex-1">
-                  <p className="font-semibold">{item.Produk.nama}</p>
+                  <p className="font-semibold">{item.Produk?.nama}</p>
                   <p className="text-sm text-gray-600">
-                    Jumlah: {item.quantity}
+                    Jumlah: {item?.quantity}
                   </p>
                   <p className="text-sm text-gray-800 font-medium">
                     Total: Rp{" "}
-                    {parseInt(item.totalHarga).toLocaleString("id-ID")}
+                    {parseInt(item?.totalHarga).toLocaleString("id-ID")}
                   </p>
                 </div>
               </div>

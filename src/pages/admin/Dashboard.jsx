@@ -78,7 +78,7 @@ const Dashboard = () => {
     //   </div>
     // </div>
     <div className="p-2">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
         <StatCard title="Total Kategori" value={kategori.length} />
         <StatCard title="Total Produk" value={produk.length} />
         <StatCard title="Total Transaksi" value={transaksi.length} />

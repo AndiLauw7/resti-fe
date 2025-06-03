@@ -39,9 +39,9 @@ export const CustomerProduk = () => {
 
   return (
     <div className="p-6 py-12 bg-gray-50 min-h-screen mt-5">
-      <h1 className="text-2xl md:text-3xl font-bold mb-4 text-center text-gray-800">
+      <h6 className="text-3xl font-bold text-center mb-8 text-blue-800">
         Produk Kami
-      </h1>
+      </h6>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {produkList.map((produk) => (
           <div
