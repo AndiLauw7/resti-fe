@@ -80,6 +80,9 @@ const HeaderCustomer = () => {
               >
                 Produk
               </Link>
+              <Link to="/chat" className="text-gray-700 hover:text-blue-600">
+                Chat
+              </Link>
               <IconButton
                 sx={{
                   p: 0,
@@ -190,6 +193,7 @@ const HeaderCustomer = () => {
             <Link to="/profil" className="text-gray-700 hover:text-blue-600">
               Profil
             </Link>
+
             <button onClick={klikLogout} className="text-red-600 mt-1">
               Logout
             </button>

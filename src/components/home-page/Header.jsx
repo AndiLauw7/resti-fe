@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Search, ShoppingCart, User } from "lucide-react";
@@ -7,8 +8,6 @@ import { KeranjangContext } from "../../context/KeranjangContext";
 import { IconButton } from "@mui/material";
 import logo from "../../assets/logoResti.jpg";
 const Header = () => {
-
-  
   const [isOpen, setIsOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");

@@ -19,7 +19,8 @@ import { KeranjangProvider } from "./context/KeranjangContext.jsx";
 import { CustomerProduk } from "./pages/pengguna/produk/CustomerProduk.jsx";
 import Profil from "./pages/pengguna/profil/Profl.jsx";
 import MainLayout from "./context/LayoutsPenggunaContext.jsx";
-
+import Chat from "./pages/chat/Chat.jsx";
+import { SocketProvider } from "./context/SocketContext.jsx";
 function App() {
   return (
     <AuthProvider>
@@ -48,6 +49,14 @@ function App() {
                 element={
                   <CustomerPrivateRoute>
                     <Profil />
+                  </CustomerPrivateRoute>
+                }
+              />
+              <Route
+                path="/chat"
+                element={
+                  <CustomerPrivateRoute>
+                    <Chat />
                   </CustomerPrivateRoute>
                 }
               />
