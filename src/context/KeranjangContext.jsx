@@ -9,30 +9,26 @@ import {
 export const KeranjangContext = createContext([]);
 export const KeranjangProvider = ({ children }) => {
   const [keranjangList, setKeranjangList] = useState([]);
-  console.log(keranjangList);
   const [loading, setLoading] = useState(false);
-  const [keranjangOpen, setKeranjangOpen] = useState(false);
   const [message, setMessage] = useState({ text: "", severity: "" });
   const { pengguna } = useContext(AuthContext);
+  // const [keranjangOpen, setKeranjangOpen] = useState(false);
 
-  const toggleSideBar = () => {
-    setKeranjangOpen((prev) => !prev);
-  };
+  // const toggleSideBar = () => {
+  //   setKeranjangOpen((prev) => !prev);
+  // };
   const fetchDataKeranjang = async () => {
     if (!pengguna) return;
     setLoading(true);
 
     try {
       const data = await getKeranjangByPengguna(pengguna.id);
-      console.log(data);
-
       setKeranjangList(data);
       setMessage({
         text: "Keranjang berhasil dimuat!",
         severity: "success",
       });
     } catch (error) {
-      console.error("Gagal memuat keranjang:", error);
       setMessage({
         text: "Gagal memuat keranjang",
         severity: "error",
@@ -79,8 +75,8 @@ export const KeranjangProvider = ({ children }) => {
         tambahKeKeranjang,
         message,
         loading,
-        keranjangOpen,
-        toggleSideBar,
+        // keranjangOpen,
+        // toggleSideBar,
       }}
     >
       {children}

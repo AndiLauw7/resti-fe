@@ -7,7 +7,6 @@ import {
   getAllProduk,
   getAllTransaksi,
 } from "../../services/admin/dashboard.js";
-import { AuthContext } from "../../context/AuthContext.jsx";
 import TransaksiChart from "../../components/transaksi-charts/TransaksiCharts.jsx";
 
 const Dashboard = () => {
@@ -45,38 +44,6 @@ const Dashboard = () => {
   ];
 
   return (
-    // <div className="p-6">
-    //   <h1 className="text-xl font-bold  mb-4">Dashboard </h1>
-    //   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-    //     <StatCard
-    //       title="Total Kategori"
-    //       value={kategori ? kategori.length : 0}
-    //       color="border-yellow-500"
-    //     />
-
-    //     <StatCard
-    //       title="Total Produk"
-    //       value={produk && Array.isArray(produk) ? produk.length : 0}
-    //       color="border-blue-500"
-    //     />
-
-    //     <StatCard
-    //       title="Total Transaksi"
-    //       value={transaksi ? transaksi.length : 0}
-    //       color="border-green-500"
-    //     />
-    //     <StatCard
-    //       title="Transaksi Sukses"
-    //       value={transaksiSucces}
-    //       color="border-green-500"
-    //     />
-    //     <StatCard
-    //       title="Transaksi Batal"
-    //       value={trnasaksiBatal}
-    //       color="border-red-500"
-    //     />
-    //   </div>
-    // </div>
     <div className="p-2">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
         <StatCard title="Total Kategori" value={kategori.length} />

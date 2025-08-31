@@ -1,50 +1,7 @@
-// import React, { useContext } from "react";
-// import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
-// import { AuthContext } from "../../context/AuthContext";
-
-// const AdminLayouts = () => {
-//   const navigate = useNavigate();
-//   const { pengguna, handleLogout } = useContext(AuthContext);
-//   const klikLogout = async () => {
-//     await handleLogout();
-//     navigate("/login");
-//   };
-
-//   return (
-//     <div className="flex min-h-screen">
-//       <aside className="w-64 bg-blue-900 text-white p-4">
-//         <h2 className="text-xl font-bold mb-4">Admin Panel</h2>
-//         <nav className="flex flex-col gap-2">
-//           <Link to="/admin/dashboard">Dashboard</Link>
-//           <Link to="/admin/kategori">Kelola Kategori</Link>
-//           <Link to="/admin/produk">Kelola Produk</Link>
-//           <Link to="/admin/transaksi">Kelola Transaksi</Link>
-
-//           <button
-//             onClick={klikLogout}
-//             className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-//           >
-//             Logout
-//           </button>
-//         </nav>
-//       </aside>
-
-//       <main className="flex-1 bg-gray-100 overflow-auto">
-//         <div className="min-h-full p-6">
-//           <h1 className="text-2lg font-bold"> Hello,{pengguna.nama}</h1>
-//           <Outlet />
-//         </div>
-//       </main>
-//     </div>
-//   );
-// };
-
-// export default AdminLayouts;
 import React, { useContext } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
-// Import icon dari react-icons (pakai Feather Icons untuk clean look)
 import {
   FiHome,
   FiTag,
@@ -52,6 +9,7 @@ import {
   FiShoppingCart,
   FiLogOut,
 } from "react-icons/fi";
+import { MessageCircle } from "lucide-react";
 
 const AdminLayouts = () => {
   const navigate = useNavigate();
@@ -114,6 +72,15 @@ const AdminLayouts = () => {
           >
             <FiShoppingCart size={20} />
             Kelola Transaksi
+          </NavLink>
+          <NavLink
+            to="/admin/admin-chat"
+            className={({ isActive }) =>
+              isActive ? activeClass : inactiveClass
+            }
+          >
+            <MessageCircle size={20} />
+            Kelola Chat
           </NavLink>
           <button
             onClick={klikLogout}

@@ -2,10 +2,11 @@ import { useContext, useState } from "react";
 import { KeranjangContext } from "../../../context/KeranjangContext";
 import { X } from "lucide-react";
 import axios from "axios";
+import { SideBarContext } from "../../../context/SideBarContext";
 
 const KeranjangSideBar = () => {
-  const { keranjangList, keranjangOpen, toggleSideBar, fetchDataKeranjang } =
-    useContext(KeranjangContext);
+  const { keranjangList } = useContext(KeranjangContext);
+  const { activeSidebar, closeSidebar } = useContext(SideBarContext);
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const BASE_URL_API = import.meta.env.VITE_APP_API_BASE_URL;
 
@@ -61,12 +62,12 @@ const KeranjangSideBar = () => {
   return (
     <div
       className={`fixed top-0 right-0 h-full w-80 bg-white shadow-lg z-50 transform transition-transform duration-300 ${
-        keranjangOpen ? "translate-x-0" : "translate-x-full"
+        activeSidebar === "cart" ? "translate-x-0" : "translate-x-full"
       }`}
     >
       <div className="flex justify-between items-center p-4 border-b">
         <h2 className="text-lg font-semibold">Keranjang</h2>
-        <button onClick={toggleSideBar}>
+        <button onClick={closeSidebar}>
           <X />
         </button>
       </div>

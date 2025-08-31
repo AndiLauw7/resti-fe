@@ -1,11 +1,19 @@
 import { useContext, useState } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Search, ShoppingCart, User } from "lucide-react";
+import {
+  Menu,
+  X,
+  Search,
+  ShoppingCart,
+  User,
+  MessageCircle,
+} from "lucide-react";
 import { AuthContext } from "../../context/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { KeranjangContext } from "../../context/KeranjangContext";
 import { IconButton } from "@mui/material";
 import logo from "../../assets/logoResti.jpg";
+import { SideBarContext } from "../../context/SideBarContext";
 const HeaderCustomer = () => {
   const navigate = useNavigate();
   const { pengguna, handleLogout } = useContext(AuthContext);
@@ -16,7 +24,10 @@ const HeaderCustomer = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
   const toggleSearch = () => setSearchOpen(!searchOpen);
 
-  const { toggleSideBar } = useContext(KeranjangContext);
+  // const { toggleSideBar } = useContext(KeranjangContext);
+
+  const { openSidebar, openSidebarChat } = useContext(SideBarContext);
+
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -80,9 +91,7 @@ const HeaderCustomer = () => {
               >
                 Produk
               </Link>
-              <Link to="/chat" className="text-gray-700 hover:text-blue-600">
-                Chat
-              </Link>
+
               <IconButton
                 sx={{
                   p: 0,
@@ -91,7 +100,19 @@ const HeaderCustomer = () => {
                     color: "#2563EB",
                   },
                 }}
-                onClick={toggleSideBar}
+                onClick={() => openSidebar("chat")}
+              >
+                <MessageCircle size={20} />
+              </IconButton>
+              <IconButton
+                sx={{
+                  p: 0,
+                  color: "#4B5563",
+                  "&:hover": {
+                    color: "#2563EB",
+                  },
+                }}
+                onClick={() => openSidebar("cart")}
               >
                 <ShoppingCart size={20} />
               </IconButton>

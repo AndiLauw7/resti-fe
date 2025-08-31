@@ -1,27 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-// const kategori = [
-//   { nama: "Sofa", img: "/images/kategori/sofa.jpg" },
-//   { nama: "Meja", img: "/images/kategori/meja.jpg" },
-//   { nama: "Tempat Tidur", img: "/images/kategori/tempat-tidur.jpg" },
-// ];
-
-// const KategoriSection = () => {
-//   return (
-//     <div className="py-8 px-4">
-//       <h2 className="text-2xl font-bold mb-4">Kategori</h2>
-//       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-//         {kategori.map((item, index) => (
-//           <div key={index} className="text-center">
-//             <p className="mt-2 font-medium">{item.nama}</p>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default KategoriSection;
-
 import { motion } from "framer-motion";
 import { KategoriContext } from "../../context/KategoriContext";
 import { useContext } from "react";
