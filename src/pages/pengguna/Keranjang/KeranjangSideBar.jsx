@@ -1,16 +1,24 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { KeranjangContext } from "../../../context/KeranjangContext";
 import { X } from "lucide-react";
 import axios from "axios";
 import { SideBarContext } from "../../../context/SideBarContext";
+import { AuthContext } from "../../../context/AuthContext";
 
 const KeranjangSideBar = () => {
-  const { keranjangList } = useContext(KeranjangContext);
+  const { keranjangList, setKeranjangList } = useContext(KeranjangContext);
+  const { pengguna } = useContext(AuthContext);
   const { activeSidebar, closeSidebar } = useContext(SideBarContext);
+  const [alamat_kirim, setAlamatKirim] = useState("");
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const BASE_URL_API = import.meta.env.VITE_APP_API_BASE_URL;
 
   const [selectItems, setSelectItems] = useState([]);
+  useEffect(() => {
+    if (pengguna?.alamat) {
+      setAlamatKirim(pengguna.alamat);
+    }
+  }, [pengguna]);
   const handleCheck = (itemId) => {
     setSelectItems((prev) =>
       prev.includes(itemId)
@@ -19,6 +27,10 @@ const KeranjangSideBar = () => {
     );
   };
   const handleCheckout = async () => {
+    if (!alamat_kirim) {
+      alert("Alamat kirim wajib diisi!");
+      return;
+    }
     const itemsToCheckout = keranjangList
       .filter((item) => selectItems.includes(item.id))
       .map((item) => ({
@@ -39,6 +51,7 @@ const KeranjangSideBar = () => {
         {
           penggunaId,
           tanggal,
+          alamat_kirim,
           items: itemsToCheckout,
         }
       );
@@ -59,6 +72,18 @@ const KeranjangSideBar = () => {
       );
     }
   };
+
+  const deleteItemsKeranjang = async (id) => {
+    try {
+      await axios.delete(`${BASE_URL_API}/keranjang/delete-keranjang/${id}`);
+      setKeranjangList((prev) => prev.filter((item) => item.id !== id));
+    } catch (error) {
+      alert(
+        "Gagal menghapus item: " +
+          (error.response?.data?.message || error.message)
+      );
+    }
+  };
   return (
     <div
       className={`fixed top-0 right-0 h-full w-80 bg-white shadow-lg z-50 transform transition-transform duration-300 ${
@@ -76,17 +101,17 @@ const KeranjangSideBar = () => {
           <p>Keranjang kosong</p>
         ) : (
           keranjangList.map((item) => {
-            const image = item.Produk?.image;
+            // const image = item.Produk?.image;
 
-            const src = image
-              ? `${BASE_URL}${
-                  image.startsWith("/uploads/") ? "" : "/uploads/"
-                }${image}`
-              : "fallback.jpg";
+            // const src = image
+            //   ? `${BASE_URL}${
+            //       image.startsWith("/uploads/") ? "" : "/uploads/"
+            //     }${image}`
+            //   : "fallback.jpg";
             return (
               <div
                 key={item.id}
-                className="flex items-start gap-4 border-b pb-4"
+                className="relative  flex items-start gap-4 border-b pb-4"
               >
                 <input
                   type="checkbox"
@@ -94,9 +119,22 @@ const KeranjangSideBar = () => {
                   checked={selectItems.includes(item.id)}
                   onChange={() => handleCheck(item.id)}
                 />
-                <img
+                {/* <img
                   src={src}
                   alt={item.Produk?.nama}
+                  className="w-16 h-16 object-cover rounded"
+                /> */}
+                <img
+                  src={
+                    item.Produk?.image
+                      ? `${BASE_URL}${
+                          item.Produk.image.startsWith("/uploads/")
+                            ? ""
+                            : "/uploads/"
+                        }${item.Produk.image}`
+                      : "/placeholder.png"
+                  }
+                  alt={item.Produk?.nama || "Produk"}
                   className="w-16 h-16 object-cover rounded"
                 />
                 <div className="flex-1">
@@ -109,10 +147,26 @@ const KeranjangSideBar = () => {
                     {parseInt(item?.totalHarga).toLocaleString("id-ID")}
                   </p>
                 </div>
+                <button
+                  onClick={() => deleteItemsKeranjang(item.id)}
+                  className="absolute right-0 top-0  p-1 text-gray-500 hover:text-red-600"
+                >
+                  <X size={16} />
+                </button>
               </div>
             );
           })
         )}
+        <div className="p-4 border-t">
+          <label className="block text-gray-700 mb-1">Alamat Kirim</label>
+          <textarea
+            value={alamat_kirim}
+            onChange={(e) => setAlamatKirim(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg p-2"
+            rows={3}
+            required
+          />
+        </div>
       </div>
 
       <div className="p-4 border-t">

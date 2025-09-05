@@ -85,6 +85,7 @@ export const AuthProvider = ({ children }) => {
         handleLogin,
         handleRegister,
         handleLogout,
+        setPengguna,
       }}
     >
       {children}
