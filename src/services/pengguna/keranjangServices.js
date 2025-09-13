@@ -11,7 +11,6 @@ export const createKeranjang = async (penggunaId, produkId, quantity = 1) => {
 export const getKeranjangByPengguna = async (penggunaId) => {
   try {
     const response = await API.get(`/keranjang/get-keranjang/${penggunaId}`);
-    console.log(response);
 
     return response.data.data;
   } catch (error) {

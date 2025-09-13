@@ -30,34 +30,38 @@ export const TransaksiDetailModal = ({ open, handleClose, transaksi }) => {
             </div>
           )}
 
+          <div>
+            <p className="text-sm text-gray-500 mb-2 font-medium">
+              Item Transaksi
+            </p>
+            <ul className="space-y-2">
+              {transaksi.TransaksiItems.map((item) => (
+                <li
+                  key={item.id}
+                  className="flex justify-between bg-white p-3 rounded-lg shadow-sm border"
+                >
+                  <span>
+                    {item.Produk?.nama}{" "}
+                    <span className="text-gray-500">x{item.quantity}</span>
+                  </span>
+
+                  <span className="font-semibold">
+                    Rp {item.subtotal.toLocaleString("id-ID")}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <div className="bg-gray-50 p-4 rounded-xl shadow-sm col-span-1 md:col-span-2">
             <p className="text-sm text-gray-500">Total</p>
             <p className="text-lg font-bold text-green-600">
-              Rp {transaksi.total.toLocaleString("id-ID")}
+              Ongkir Rp {transaksi.ongkir.toLocaleString("id-ID")}
+            </p>
+            <p className="text-lg font-bold text-green-600">
+              Total Harga Rp {transaksi.total.toLocaleString("id-ID")}
             </p>
           </div>
-        </div>
-
-        <div>
-          <p className="text-sm text-gray-500 mb-2 font-medium">
-            Item Transaksi
-          </p>
-          <ul className="space-y-2">
-            {transaksi.TransaksiItems.map((item) => (
-              <li
-                key={item.id}
-                className="flex justify-between bg-white p-3 rounded-lg shadow-sm border"
-              >
-                <span>
-                  {item.Produk?.nama}{" "}
-                  <span className="text-gray-500">x{item.quantity}</span>
-                </span>
-                <span className="font-semibold">
-                  Rp {item.subtotal.toLocaleString("id-ID")}
-                </span>
-              </li>
-            ))}
-          </ul>
         </div>
 
         <div className="bg-blue-50 p-4 rounded-xl shadow-sm border border-blue-200">

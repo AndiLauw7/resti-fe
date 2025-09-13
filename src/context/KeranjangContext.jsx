@@ -13,11 +13,7 @@ export const KeranjangProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ text: "", severity: "" });
   const { pengguna } = useContext(AuthContext);
-  // const [keranjangOpen, setKeranjangOpen] = useState(false);
 
-  // const toggleSideBar = () => {
-  //   setKeranjangOpen((prev) => !prev);
-  // };
   const fetchDataKeranjang = async () => {
     if (!pengguna) return;
     setLoading(true);

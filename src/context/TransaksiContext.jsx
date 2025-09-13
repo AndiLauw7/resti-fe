@@ -15,6 +15,8 @@ export const TransaksiProvider = ({ children }) => {
   const [transaksiUser, setTransaksiUser] = useState([]);
 
   const [selectedTransaksi, setSelectedTransaksi] = useState(null);
+  console.log(selectedTransaksi);
+
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ text: "", severity: "" });
   const [startDate, setStartDate] = useState("");
@@ -23,11 +25,9 @@ export const TransaksiProvider = ({ children }) => {
   const fetchTransaksiData = async (startDate, endDate) => {
     try {
       const res = await getLaporanTransaksi(startDate, endDate);
-      console.log(res.data.data);
 
       setTransaksiList(res.data.data);
     } catch (error) {
-      console.log(error);
       setMessage({
         text: "Gagal mengambil data transaksi",
         severity: "error",
@@ -72,7 +72,6 @@ export const TransaksiProvider = ({ children }) => {
     try {
       if (id && token) {
         const res = await getTransaksiByUserId(id, token);
-        console.log(res.data);
 
         setTransaksiUser(res.data.data);
       }

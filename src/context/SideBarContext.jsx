@@ -5,7 +5,6 @@ export const SidebarProvider = ({ children }) => {
   const [activeSidebar, setActiveSidebar] = useState(null);
 
   const openSidebar = (type) => setActiveSidebar(type);
-  //   const openSidebarChat = () => setActiveSidebar("chat");
   const closeSidebar = () => setActiveSidebar(null);
 
   return (

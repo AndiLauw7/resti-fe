@@ -64,6 +64,8 @@ const Profil = () => {
     // List item produk
     let y = 90;
     trx.TransaksiItems?.forEach((item, index) => {
+      console.log(item);
+      
       pdf.text(
         `${index + 1}. ${item.Produk?.nama} - ${item.quantity} x ${formatRupiah(
           item.Produk?.harga
