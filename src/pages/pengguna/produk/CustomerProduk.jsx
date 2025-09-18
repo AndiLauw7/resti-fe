@@ -66,7 +66,9 @@ export const CustomerProduk = () => {
             <p className="mt-1 text-xl font-bold text-blue-700 mb-2">
               {formatRupiah(produk.harga)}
             </p>
-
+            <h2 className="text-lg font-semibold text-gray-800">
+              {produk.keterangan}
+            </h2>
             {!pengguna ? (
               <button
                 onClick={handleCheckout}

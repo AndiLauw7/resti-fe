@@ -87,7 +87,9 @@ const ProdukSection = () => {
               <p className="mt-1 text-lg font-semibold text-gray-800 hover:text-blue-700 transition mb-2">
                 {formatRupiah(item.harga)}
               </p>
-
+              <p className="mt-3 text-lg font-semibold text-gray-800 hover:text-blue-700 transition">
+                {item.keterangan || "Tidak ada keterangan"}
+              </p>
               {!pengguna ? (
                 <button
                   onClick={handleCheckout}
